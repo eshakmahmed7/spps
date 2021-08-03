@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GITHUB USERS</title>
+
+      <style>
+            body {
+                  background-color: lightblue;
+                  font-family: 'Anton', sans-serif;
+                  font-family: 'Staatliches', cursive;
+                  width: 50%;
+                  float: center;
+                }
+
+            
+            .users {
+                  width: 50%;
+                  float: right;
+                  margin-left: 5%;
+                  padding-left: 2%;
+                 }
+
+            h1 {
+                  font-size: 50px;
+                  text-align: right;
+            }
+
+            section {
+                  height: 50%;
+                  padding-bottom: 50%;
+            }
+
+            footer p {
+                  text-align: center;
+            }
+            button{
+                border: 2px solid green;
+                padding: 10px;
+                border-radius: 25px;
+            }
+      </style>
+</head>
+
+<body>
+      <h1>Github Users</h1>
+      <button id="fetch">Fetch Data</button>
+
+      <div class="users">
+            <section id="info"></section>
+      </div>
+      <section id="info"></section>
+
+      <div class="half-width">
+
+
+
+            <script>
+                  document.getElementById('fetch').addEventListener('click', loadm);
+
+                  function loadm() {
+                        var req = new XMLHttpRequest();
+                        req.open('GET', 'https://api.github.com/users');
+
+                        req.onload = function () {
+                              if (req.status == 200) {
+                                    for (var i = 0; i <= 4; i++) {
+                                          var data = JSON.parse(req.responseText);
+                                          var url = data[i].avatar_url;
+                                          var id = data[i].id;
+                                          var login = data[i].login;
+
+                                          var display = '<img src=' + '"' + url + '"' + 'height=180px' + ' width=150px' + '>' + " " + "ID:" + id + "  " + "Login: " + login;
+                                          document.getElementById('info').innerHTML += display;
+                                          
+                                    }
+
+
+                              }
+                        }
+                        req.send();
+                  }
+
+            </script>
+      </div>
+      
+
+
+</body>
+<footer>
+      <P>© Eshak 2021, all rights reserved.</P>
+</footer>
